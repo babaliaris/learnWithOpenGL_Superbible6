@@ -13,6 +13,7 @@ project "Sandbox"
     }
 
     includedirs {
+        "src",
         "%{_WORKING_DIR}/external/superbible6/include",
         "%{_WORKING_DIR}/external/superbible6/extern/glfw-2.7.6/include",
     }

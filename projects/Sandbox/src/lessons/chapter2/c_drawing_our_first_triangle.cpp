@@ -1,6 +1,7 @@
 #include "c_drawing_our_first_triangle.h"
 #include <sb6.h>
 #include <math.h>
+#include <core/glcall.h>
 
 static GLuint CreateProgram(const GLchar *const *vertexSrc, const GLchar *const *fragSrc);
 
@@ -12,8 +13,8 @@ Lesson("DrawingOurFirstTriangle")
 
 DrawingOurFirstTriangle::~DrawingOurFirstTriangle()
 {
-    glDeleteProgram(m_program);
-    glDeleteVertexArrays(1, &m_vao);
+    glCall(glDeleteProgram(m_program));
+    glCall(glDeleteVertexArrays(1, &m_vao));
 }
 
 void DrawingOurFirstTriangle::onStart()
@@ -41,9 +42,9 @@ void DrawingOurFirstTriangle::onStart()
 
     m_program = CreateProgram(vertexSource, fragmentSource);
 
-    glGenVertexArrays(1, &m_vao);
+    glCall(glGenVertexArrays(1, &m_vao));
 
-    glPointSize(45.0f);
+    glCall(glPointSize(45.0f));
 }
 
 
@@ -56,11 +57,11 @@ void DrawingOurFirstTriangle::onUpdate(double currentTime, double deltaTime)
         1.0f
     };
 
-    glClearBufferfv(GL_COLOR, 0, color);
+    glCall(glClearBufferfv(GL_COLOR, 0, color));
 
-    glBindVertexArray(m_vao);
-    glUseProgram(m_program);
-    glDrawArrays(GL_TRIANGLES, 0, 3);
+    glCall(glBindVertexArray(m_vao));
+    glCall(glUseProgram(m_program));
+    glCall(glDrawArrays(GL_TRIANGLES, 0, 3));
 }
 
 
@@ -68,20 +69,20 @@ static GLuint CompileShader(const GLchar *const *source, GLenum shader_type)
 {
     GLuint shader = glCreateShader(shader_type);
     
-    glShaderSource(shader, 1, source, NULL);
+    glCall(glShaderSource(shader, 1, source, NULL));
 
-    glCompileShader(shader);
+    glCall(glCompileShader(shader));
 
     GLint success, length_info;
 
-    glGetShaderiv(shader, GL_COMPILE_STATUS, &success);
-    glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length_info);
+    glCall(glGetShaderiv(shader, GL_COMPILE_STATUS, &success));
+    glCall(glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &length_info));
 
     if (!success)
     {
         char *info = new char[length_info];
 
-        glGetShaderInfoLog(shader, length_info, NULL, info);
+        glCall(glGetShaderInfoLog(shader, length_info, NULL, info));
 
         std::string shaderTypeStr = (shader_type == GL_VERTEX_SHADER ? "Vertex" : "Fragment");
 
@@ -102,23 +103,23 @@ static GLuint CreateProgram(const GLchar *const *vertexSrc, const GLchar *const 
     GLuint vertexShader = CompileShader(vertexSrc, GL_VERTEX_SHADER);
     GLuint fragShader = CompileShader(fragSrc, GL_FRAGMENT_SHADER);
 
-    GLuint program = glCreateProgram();
+    glCall(GLuint program = glCreateProgram());
 
-    glAttachShader(program, vertexShader);
-    glAttachShader(program, fragShader);
+    glCall(glAttachShader(program, vertexShader));
+    glCall(glAttachShader(program, fragShader));
 
-    glLinkProgram(program);
+    glCall(glLinkProgram(program));
 
     GLint success, length_info;
 
-    glGetProgramiv(program, GL_LINK_STATUS, &success);
-    glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length_info);
+    glCall(glGetProgramiv(program, GL_LINK_STATUS, &success));
+    glCall(glGetProgramiv(program, GL_INFO_LOG_LENGTH, &length_info));
 
     if (!success)
     {
         char *info = new char[length_info];
 
-        glGetProgramInfoLog(program, length_info, NULL, info);
+        glCall(glGetProgramInfoLog(program, length_info, NULL, info));
 
         printf("[Program Linkage FAILED] %s", info);
 
@@ -128,8 +129,8 @@ static GLuint CreateProgram(const GLchar *const *vertexSrc, const GLchar *const 
         program = 0;
     }
 
-    glDeleteShader(vertexShader);
-    glDeleteShader(fragShader);
+    glCall(glDeleteShader(vertexShader));
+    glCall(glDeleteShader(fragShader));
 
     return program;
 }
