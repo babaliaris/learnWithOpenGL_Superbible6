@@ -1,21 +1,17 @@
-# OpenGL Superbible 6 (premake5) sandbox project
-
-Because I had multiple problems compiling and using the application framework sb6 and because I didn't
-want to install GLFW globally in my system, I decided to create a sandbox environment using 
-[premake5](https://premake.github.io/) as the project files generator (instead of cmake).
-
-From now on, I will refer to the root directory of this repo as **$repo_dir**
+# OpenGL Superbible 6 (Personal Learning Project)
+This is a personal project that I'm working on along with the book
+OpenGL Superbible 6th edition.
 
 ## How to Compile:
 
 **Clone The Project:**
 ```
-git clone https://github.com/babaliaris/openGL_Superbible6_Sandbox.git
+git clone https://github.com/babaliaris/learnWithOpenGL_Superbible6.git
 ```
 
 Generate the project files using [premake5](https://premake.github.io/). How to use premake: [Using Premake](https://premake.github.io/docs/Using-Premake/) 
 ```
-cd <$repo_dir>
+cd <repo_dir>
 premake5 <action>
 ```
 Then open your project solution or whatever file(s) you generate with premake and compile.
@@ -36,11 +32,4 @@ make clean
 You can also manually delete the **<$repo_dir>/builds** and **<$repo_dir>/obj** directories.
 
 ## How To Run:
-**Unix Systems:** `./builds/debug_x64/sandbox`.
-
-**Now start writing your own code, using:** [$repo_dir/projects/Sandbox/src/sandbox.cpp](https://github.com/babaliaris/openGL_Superbible6_Sandbox/blob/dev/projects/Sandbox/src/sandbox.cpp) as the starting point!!!
-**Or** Include the [GLFW premake5.lua](https://github.com/babaliaris/openGL_Superbible6_Sandbox/blob/dev/external/superbible6/extern/glfw-2.7.6/premake5.lua) and [superbible6 premake5.lua](https://github.com/babaliaris/openGL_Superbible6_Sandbox/blob/dev/external/superbible6/premake5.lua)
-scripts into your own workspace **premake5** script ([like this one](https://github.com/babaliaris/openGL_Superbible6_Sandbox/blob/dev/premake5.lua)) and create a **ConsoleApp** or **WindowedApp** (For Windows) that is similar as
-[this project](https://github.com/babaliaris/openGL_Superbible6_Sandbox/blob/dev/projects/Sandbox/premake5.lua)
-
-For Windows, use the relevant executable file to start the application.
+**Unix Systems:** `./sandbox.sh`.
