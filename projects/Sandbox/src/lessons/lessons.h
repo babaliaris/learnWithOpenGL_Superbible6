@@ -2,17 +2,22 @@
 #include <iostream>
 #include "chapter2/a_our_first_application.h"
 #include "chapter2/b_using_shaders.h"
+#include "chapter2/c_drawing_our_first_triangle.h"
 
 enum class LessonE
 {
     NONE, CHAPTER2_OUR_FIRST_APPLICATION,
-    CHAPTER2_USING_SHADERS
+    CHAPTER2_USING_SHADERS,
+    CHAPTER2_DRAWING_OUR_FIRST_TRIANGLE
 };
 
 Lesson *GetLesson(LessonE lesson)
 {
     switch (lesson)
     {
+        case LessonE::CHAPTER2_DRAWING_OUR_FIRST_TRIANGLE:
+            return new DrawingOurFirstTriangle();
+
         case LessonE::CHAPTER2_USING_SHADERS:
             return new UsingShaders();
 

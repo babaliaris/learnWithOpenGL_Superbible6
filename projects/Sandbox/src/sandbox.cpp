@@ -6,7 +6,7 @@ class Sandbox : public sb6::application
     public:
     Sandbox():
     m_currentFrame(0.0f), m_lastFrame(0.0f), m_deltaTime(0.0f),
-    m_lesson( GetLesson(LessonE::CHAPTER2_USING_SHADERS) )
+    m_lesson( GetLesson(LessonE::CHAPTER2_DRAWING_OUR_FIRST_TRIANGLE) )
     {
     }
 

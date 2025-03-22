@@ -1,38 +1,42 @@
-#include "b_using_shaders.h"
+#include "c_drawing_our_first_triangle.h"
 #include <sb6.h>
 #include <math.h>
 
 static GLuint CreateProgram(const GLchar *const *vertexSrc, const GLchar *const *fragSrc);
 
-UsingShaders::UsingShaders():
-Lesson("UsingShaders")
+DrawingOurFirstTriangle::DrawingOurFirstTriangle():
+Lesson("DrawingOurFirstTriangle")
 {
 }
 
 
-UsingShaders::~UsingShaders()
+DrawingOurFirstTriangle::~DrawingOurFirstTriangle()
 {
     glDeleteProgram(m_program);
     glDeleteVertexArrays(1, &m_vao);
 }
 
-void UsingShaders::onStart()
+void DrawingOurFirstTriangle::onStart()
 {
     const GLchar *vertexSource[] = {
         "#version 430 core\n"
-        "void main(void)"
-        "{"
-            "gl_Position = vec4(0.0, 0.0, 0.5, 1.0);"
-        "}"
+        "void main(void)\n"
+        "{\n"
+            "// Declare a hard-coded array of positions\n"
+            "const vec4 vertices[3] = vec4[3](vec4( 0.25, -0.25, 0.5, 1.0),\n"
+            "vec4(-0.25, -0.25, 0.5, 1.0),\n"
+            "vec4( 0.25, 0.25, 0.5, 1.0));\n"
+            "gl_Position = vertices[gl_VertexID];\n"
+        "}\n"
     };
 
     const GLchar * fragmentSource[] = {
         "#version 430 core\n"
-        "out vec4 color;"
-        "void main(void)"
-        "{"
-            "color = vec4(0.0, 0.8, 1.0, 1.0);"
-        "}"
+        "out vec4 color;\n"
+        "void main(void)\n"
+        "{\n"
+            "color = vec4(0.0, 0.8, 1.0, 1.0);\n"
+        "}\n"
     };
 
     m_program = CreateProgram(vertexSource, fragmentSource);
@@ -43,7 +47,7 @@ void UsingShaders::onStart()
 }
 
 
-void UsingShaders::onUpdate(double currentTime, double deltaTime)
+void DrawingOurFirstTriangle::onUpdate(double currentTime, double deltaTime)
 {
     const GLfloat color[] = {
         (float)cos(currentTime) * 0.5f + 0.5f,
@@ -56,7 +60,7 @@ void UsingShaders::onUpdate(double currentTime, double deltaTime)
 
     glBindVertexArray(m_vao);
     glUseProgram(m_program);
-    glDrawArrays(GL_POINTS, 0, 1);
+    glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
 
@@ -81,7 +85,7 @@ static GLuint CompileShader(const GLchar *const *source, GLenum shader_type)
 
         std::string shaderTypeStr = (shader_type == GL_VERTEX_SHADER ? "Vertex" : "Fragment");
 
-        printf("[%s Shader Compilation FAILED] %s\n", shaderTypeStr.c_str(), info);
+        printf("[%s Shader Compilation FAILED] %s", shaderTypeStr.c_str(), info);
 
         delete info;
 
@@ -116,7 +120,7 @@ static GLuint CreateProgram(const GLchar *const *vertexSrc, const GLchar *const 
 
         glGetProgramInfoLog(program, length_info, NULL, info);
 
-        printf("[Program Linkage FAILED] %s\n", info);
+        printf("[Program Linkage FAILED] %s", info);
 
         delete info;
 
