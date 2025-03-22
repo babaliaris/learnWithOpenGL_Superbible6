@@ -9,4 +9,7 @@ class UsingShaders : public Lesson
 
     void onStart() override;
     void onUpdate(double currentTime, double deltaTime) override;
+
+    private:
+    unsigned int m_program, m_vao;
 };
