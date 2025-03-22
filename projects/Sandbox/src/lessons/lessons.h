@@ -4,19 +4,24 @@
 #include "chapter2/b_using_shaders.h"
 #include "chapter2/c_drawing_our_first_triangle.h"
 #include "chapter3/a_vertex_attributes.h"
+#include "chapter3/b_tesselation_shader.h"
 
 enum class LessonE
 {
     NONE, CHAPTER2_OUR_FIRST_APPLICATION,
     CHAPTER2_USING_SHADERS,
     CHAPTER2_DRAWING_OUR_FIRST_TRIANGLE,
-    CHAPTER3_VERTEX_ATTRIBUTES
+    CHAPTER3_VERTEX_ATTRIBUTES,
+    CHAPTER3_TESSELATION_SHADER
 };
 
 Lesson *GetLesson(LessonE lesson)
 {
     switch (lesson)
     {
+        case LessonE::CHAPTER3_TESSELATION_SHADER:
+            return new TesselationShader();
+
         case LessonE::CHAPTER3_VERTEX_ATTRIBUTES:
             return new VertexAttributes();
 
