@@ -1,0 +1,23 @@
+#Directories
+obj/
+builds/
+
+#Superbible6 sample code, glfw depedency x11 object files and library files.
+external/superbible6/extern/glfw-2.7.6/lib/x11/*.so
+external/superbible6/extern/glfw-2.7.6/lib/x11/*.a
+external/superbible6/extern/glfw-2.7.6/lib/x11/*.o
+
+#Makefiles.
+Makefile
+
+#This is the book's owner custom Makefile for GLFW and we NEED it,
+#so we won't have to write our own. It is a little bit "messy", but
+#it works!!!
+!external/superbible6/extern/glfw-2.7.6/Makefile
+
+#Visual Studio
+*.vs/
+*.sln
+*.vcxproj
+*.vcxproj.filters
+*.vcxproj.user
