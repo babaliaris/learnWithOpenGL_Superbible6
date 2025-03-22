@@ -2,7 +2,12 @@
 layout(location = 0) in vec4 vOffset;
 layout(location = 1) in vec4 vColor;
 
-out vec4 fColor;
+
+out VER_OUT {
+    vec4 color;
+}data_out;
+
+
 
 void main(void)
 {
@@ -14,5 +19,5 @@ void main(void)
 
     gl_Position = vertices[gl_VertexID] + vOffset; //Set position of the vertex.
 
-    fColor = vColor; //Send the color as retrieved from the fetching stage to the fragment shader.
+    data_out.color = vColor; //Send the color as retrieved from the fetching stage to the fragment shader.
 }

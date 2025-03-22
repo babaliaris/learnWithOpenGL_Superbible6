@@ -20,13 +20,15 @@ TesselationShader::~TesselationShader()
 void TesselationShader::onStart()
 {
     std::vector<ShaderOptions> opts = {
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.v.glsl", ShaderTypeE::VERTEX},
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.f.glsl", ShaderTypeE::FRAGMENT}
+        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.ver.glsl", ShaderTypeE::VERTEX},
+        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.fra.glsl", ShaderTypeE::FRAGMENT},
+        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.tcs.glsl", ShaderTypeE::TESSELATION_CONTROL},
+        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.tes.glsl", ShaderTypeE::TESSELATION_EVALUATION}
     };
 
     m_shader = new Shader(opts);
 
-    m_shader->SetUniform("asdasd", 10);
+    glCall(glPolygonMode(GL_FRONT_AND_BACK, GL_LINE));
 
     glCall(glGenVertexArrays(1, &m_vao));
 
@@ -38,12 +40,7 @@ void TesselationShader::onUpdate(double currentTime, double deltaTime)
 {   
 
     //Clear Color.
-    const GLfloat clear_color[] = {
-        (float)sin(currentTime) * 0.5f + 0.5f,
-        (float)cos(currentTime) * 0.5f + 0.5f,
-        0.0f,
-        1.0f
-    };
+    const GLfloat clear_color[] = {0.0f,0.0f,0.0f,1.0f};
 
     //Triangle Color (Clear color reversed).
     const GLfloat triangle_color[] = {
@@ -69,8 +66,11 @@ void TesselationShader::onUpdate(double currentTime, double deltaTime)
     //Clear the screen before drawing.
     glCall(glClearBufferfv(GL_COLOR, 0, clear_color));
 
+    //Set Tesselation Control Shader input patch.
+    glCall(glPatchParameteri(GL_PATCH_VERTICES, 3));
+
     //Draw Call.
     m_shader->Bind();
     glCall(glBindVertexArray(m_vao));
-    glCall(glDrawArrays(GL_TRIANGLES, 0, 3));
+    glCall(glDrawArrays(GL_PATCHES, 0, 3));
 }
