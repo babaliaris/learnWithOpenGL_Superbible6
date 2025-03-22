@@ -51,7 +51,7 @@ void Shader::SetUniform(const char *name, int value)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -69,7 +69,7 @@ void Shader::SetUniform(const char *name, float value)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -87,7 +87,7 @@ void Shader::SetUniform(const char *name, const vmath::vec2 &vec2)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -105,7 +105,7 @@ void Shader::SetUniform(const char *name, const vmath::vec3 &vec3)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -123,7 +123,7 @@ void Shader::SetUniform(const char *name, const vmath::vec4 &vec4)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -141,7 +141,7 @@ void Shader::SetUniform(const char *name, const vmath::mat2 &mat2)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -159,7 +159,7 @@ void Shader::SetUniform(const char *name, const vmath::mat4 &mat4)
 
     if (loc < 0)
     {
-        printf("[Uniform Upload Error]\n\t%s\n\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
+        printf("[Uniform Upload Error]\n%s\tReason: Uniform \"%s\", was not found!\n", GetDebugStr().c_str(), name);
         return;
     }
 
@@ -187,7 +187,7 @@ std::string Shader::GetDebugStr()
 
     for (ShaderOptions opt : m_shaderOptions)
     {
-        ss << opt.GetDebugStr() << std::endl;
+        ss << "\t" << opt.GetDebugStr() << std::endl;
     }
 
     return ss.str();
