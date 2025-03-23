@@ -5,6 +5,7 @@
 #include "chapter2/c_drawing_our_first_triangle.h"
 #include "chapter3/a_vertex_attributes.h"
 #include "chapter3/b_tesselation_shader.h"
+#include "chapter3/c_tesselation_and_geometry.h"
 
 enum class LessonE
 {
@@ -12,13 +13,17 @@ enum class LessonE
     CHAPTER2_USING_SHADERS,
     CHAPTER2_DRAWING_OUR_FIRST_TRIANGLE,
     CHAPTER3_VERTEX_ATTRIBUTES,
-    CHAPTER3_TESSELATION_SHADER
+    CHAPTER3_TESSELATION_SHADER,
+    CHAPTER3_TESSELATION_AND_GEOMETRY
 };
 
 Lesson *GetLesson(LessonE lesson)
 {
     switch (lesson)
     {
+        case LessonE::CHAPTER3_TESSELATION_AND_GEOMETRY:
+            return new TesselationAndGeometry();
+
         case LessonE::CHAPTER3_TESSELATION_SHADER:
             return new TesselationShader();
 
