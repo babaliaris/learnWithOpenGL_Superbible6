@@ -20,19 +20,21 @@ TesselationAndGeometry::~TesselationAndGeometry()
 void TesselationAndGeometry::onStart()
 {
     std::vector<ShaderOptions> opts = {
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.ver.glsl", ShaderTypeE::VERTEX},
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.fra.glsl", ShaderTypeE::FRAGMENT},
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.tcs.glsl", ShaderTypeE::TESSELATION_CONTROL},
-        {"projects/Sandbox/src/shaders/chapter3/b_tesselation_shader.tes.glsl", ShaderTypeE::TESSELATION_EVALUATION}
+        {"projects/Sandbox/src/shaders/chapter3/c_tesselation_and_geometry.ver.glsl", ShaderTypeE::VERTEX},
+        {"projects/Sandbox/src/shaders/chapter3/c_tesselation_and_geometry.fra.glsl", ShaderTypeE::FRAGMENT},
+        {"projects/Sandbox/src/shaders/chapter3/c_tesselation_and_geometry.tcs.glsl", ShaderTypeE::TESSELATION_CONTROL},
+        {"projects/Sandbox/src/shaders/chapter3/c_tesselation_and_geometry.tes.glsl", ShaderTypeE::TESSELATION_EVALUATION},
+        {"projects/Sandbox/src/shaders/chapter3/c_tesselation_and_geometry.geo.glsl", ShaderTypeE::GEOMETRY}
     };
 
     m_shader = new Shader(opts);
 
-    glCall(glPolygonMode(GL_FRONT_AND_BACK, GL_LINE));
+    //Set the poin size, in order to see the output of the geometry shader's points.
+    glCall(glPointSize(5.0f));
+
+    //glCall(glPolygonMode(GL_FRONT_AND_BACK, GL_LINE));
 
     glCall(glGenVertexArrays(1, &m_vao));
-
-    glCall(glPointSize(45.0f));
 }
 
 
